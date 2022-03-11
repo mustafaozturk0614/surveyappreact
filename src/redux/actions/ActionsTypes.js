@@ -1,0 +1,6 @@
+export const BOOLENTYPE = "boolentype"
+export const COMMENT = "comment"
+export const POİNT = "puan"
+export const SAVETEMPLATE = "savetemplate"
+export const EDİT = "edit"
+export const ADDqUESTİON = "addQuestion"
