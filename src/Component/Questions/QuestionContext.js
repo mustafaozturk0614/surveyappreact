@@ -7,13 +7,18 @@ const QuestionContext = createContext();
 
 export const QuestionProvider = ({ children }) => {
 
+    const [point, setPoint] = useState(5);
+
     const [singleQuestion, setSingleQuestion] = useState({
 
+        title: "",
+        text: 'text',
         types: 1,
         option: [],
+        orderNo: 0,
 
     })
-
+    const [count, setCount] = useState(0)
 
     const [isClick, setIsClick] = useState(
         {
@@ -28,8 +33,6 @@ export const QuestionProvider = ({ children }) => {
 
 
     const [template, setTemplate] = useState({
-
-
 
         title: 'başlık',
         description: 'text',
@@ -53,7 +56,11 @@ export const QuestionProvider = ({ children }) => {
         tempQuestion,
         setTempQuestion,
         isClick,
-        setIsClick
+        setIsClick,
+        count,
+        setCount,
+        point,
+        setPoint
     }
 
     return (

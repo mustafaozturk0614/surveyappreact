@@ -27,7 +27,7 @@ function BooleanQuestion(props) {
   }
   useEffect(() => {
 
-    console.log(template)
+    setTemplate(template)
 
 
   }, [singleQuestion, template])
@@ -48,28 +48,23 @@ function BooleanQuestion(props) {
 
 
         )}   </FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
-        value={value}
-        onChange={handleChange}
-      >
-        <FormControlLabel value="female" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
-          data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 1].option1 : ""
 
-        }</div>
+      <FormControlLabel value="female" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
+        data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 2] : ""
+
+      }</div>
 
 
-        )} />
-        <FormControlLabel value="male" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
-          data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 1].option2 : ""
+      )} />
+      <FormControlLabel value="male" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
+        data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 1] : ""
 
-        }</div>
+      }</div>
 
 
-        )} />
+      )} />
 
-      </RadioGroup>
+
     </FormControl >
   );
 

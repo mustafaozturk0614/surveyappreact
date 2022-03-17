@@ -1,23 +1,32 @@
-import React, { useEffect } from 'react'
+import { FormControl, FormLabel, RadioGroup } from '@material-ui/core'
+import React, { useContext, useEffect, useState } from 'react'
+import QuestionContext from './QuestionContext'
+import Rat from './rat'
 
 function RatingQuestion(props) {
 
-  const { count, OnChange, singleQuestion } = props
+  const { count, OnChange, order } = props
+
+  const { template, setTemplate, singleQuestion, setSingleQuestion, point, setPoint } = useContext(QuestionContext)
+
+
+
+
+  let list = []
+  let rat = (count, index) =>
+    <div className="form-check form-check-inline">
+      <input className="form-check-input" type="radio" name={order} id="inlineRadio1"
+        value={index} />
+      <label className="form-check-label" htmlFor="inlineRadio1">{index}</label>
+    </div>
 
 
   const print = () => {
 
-    for (let index = singleQuestion.min; index < singleQuestion.max; index++) {
+    for (let index = 1; index <= point; index++) {
 
-
-      <div className="form-check form-check-inline">
-        <input className="form-check-input" type="radio" name={count} id="inlineRadio1"
-          value="option1" />
-        <label className="form-check-label" htmlFor="inlineRadio1">{index}</label>
-      </div>
-
-
-
+      list.push(rat(count, index))
+      console.log(index)
     }
   }
 
@@ -25,51 +34,90 @@ function RatingQuestion(props) {
   const a = print()
 
   useEffect(() => {
-    console.log(singleQuestion.min)
+    print()
+    console.log(list)
+    console.log(singleQuestion)
 
-    console.log(singleQuestion.max)
+    console.log(template.questions)
 
-  }, [singleQuestion])
+
+  }, [singleQuestion, template, list])
   return (
 
 
     <div>
-      <div className="mx-0 mx-sm-auto">
-        <div className="text-center">
-          <p>
-            <strong>{singleQuestion.title}</strong>
-          </p>
-        </div>
+      <FormControl>
 
 
-        <div className="text-center mb-3" >
-          <div className="d-inline mx-3" >
-            {singleQuestion.start}
+        <FormLabel id="demo-row-radio-buttons-group-label">
+
+
+          {template.questions.map((data, index) => <div key={index}><strong>{
+            data.types == 2 && parseInt(data.orderNo) == parseInt(order) ? data.title : ""
+
+          } </strong></div>
+
+
+          )}   </FormLabel>
+
+
+
+
+
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+        >
+
+          <FormLabel id="demo-controlled-radio-buttons-group">
+
+
+            {template.questions.map((data, index) => <div key={index}>{
+              data.types == 2 && parseInt(data.orderNo) == parseInt(order) ? data.start : ""
+
+            } </div>
+
+
+            )}   </FormLabel>
+
+          <div style={{ display: 'flex', flexDirection: "row" }}>
+            {template.questions.map((data, index) => <div key={index} className="form-check form-check-inline" style={{ display: "flex" }}>{
+              data.types == 2 && parseInt(data.orderNo) == parseInt(order) ? list.map((d, index) => <div style={{ display: "flex" }}>
+                {d}
+
+              </div >) : ""
+
+            } </div >
+
+
+
+
+
+            )}
+
+
+
+
           </div>
 
-          <div className="form-check form-check-inline">
-            <input className="form-check-input" type="radio" name={count} id="inlineRadio1"
-              value="option1" />
-            <label className="form-check-label" htmlFor="inlineRadio1">1</label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input className="form-check-input" type="radio" name={count} id="inlineRadio1"
-              value="option1" />
-            <label className="form-check-label" htmlFor="inlineRadio1">2</label>
+          <div div className="d-inline me-4" >
+            <FormLabel id="demo-controlled-radio-buttons-group">
+
+
+              {template.questions.map((data, index) => <div key={index}>{
+                data.types == 2 && parseInt(data.orderNo) == parseInt(order) ? data.finish : ""
+
+              } </div>
+
+
+              )}   </FormLabel>
           </div>
 
-          <div className="form-check form-check-inline">
-            <input className="form-check-input" type="radio" name={count} id="inlineRadio1"
-              value="option1" />
-            <label className="form-check-label" htmlFor="inlineRadio1">3</label>
-          </div>
+        </RadioGroup >
 
-          <div className="d-inline me-4">
-            {singleQuestion.finish}
-          </div>
-        </div>
 
-      </div>
+      </FormControl>
     </div >
   )
 

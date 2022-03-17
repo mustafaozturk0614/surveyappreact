@@ -2,7 +2,7 @@ import { FormGroup } from '@material-ui/core'
 import { TextareaAutosize, TextField } from '@mui/material'
 import React from 'react'
 
-export default function EditTextQustion({ OnChange }) {
+export default function EditTextQuestion({ OnChange }) {
 
     onchange = (e) => {
 
