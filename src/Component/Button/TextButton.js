@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import QuestionContext from '../Questions/QuestionContext';
-
+import { Button } from '@mui/material';
+import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 export default function TextButton() {
 
     const { isClick, setIsClick, singleQuestion, setSingleQuestion, template, setTemplate, count, setCount } = useContext(QuestionContext)
@@ -8,7 +9,7 @@ export default function TextButton() {
 
 
     const newQuestion = {
-        title: 'başlık',
+        title: 'Title',
         text: 'text',
         types: 1,
         option: [],
@@ -30,6 +31,6 @@ export default function TextButton() {
     }
 
     return (
-        <div><button style={{ marginTop: '10px' }} value={3} type="button" className="btn btn-primary" onClick={addText} >Text</button></div>
+        <div><Button value={3}  onClick={addText}startIcon={<ModeCommentOutlinedIcon/>}>Text</Button></div>
     )
 }

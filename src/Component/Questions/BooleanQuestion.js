@@ -48,22 +48,19 @@ function BooleanQuestion(props) {
 
 
         )}   </FormLabel>
+      <RadioGroup>
+        <FormControlLabel name={count} control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
+          data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 2] : ""
+        }</div>
+        )} />
+        <FormControlLabel name={count} value="male" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
+          data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 1] : ""
 
-      <FormControlLabel value="female" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
-        data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 2] : ""
-
-      }</div>
-
-
-      )} />
-      <FormControlLabel value="male" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
-        data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 1] : ""
-
-      }</div>
+        }</div>
 
 
-      )} />
-
+        )} />
+      </RadioGroup>
 
     </FormControl >
   );

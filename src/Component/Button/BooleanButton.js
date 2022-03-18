@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import QuestionContext from '../Questions/QuestionContext';
-
+import { Button } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
 export default function BooleanButton() {
 
     const { isClick, setIsClick, singleQuestion, setSingleQuestion, template, setTemplate, count, setCount } = useContext(QuestionContext)
@@ -8,7 +9,7 @@ export default function BooleanButton() {
 
 
     const newQuestion = {
-        title: 'başlık',
+        title: 'Title',
         text: 'text',
         types: 1,
         option: [],
@@ -28,6 +29,8 @@ export default function BooleanButton() {
         setIsClick({ ...isClick, check: false })
     }
     return (
-        <div> <button style={{ marginTop: '10px' }} value={1} type="button" className="btn btn-primary" onClick={addBoolen}>Boolean</button></div>
+        <div> 
+            <Button variant="text" startIcon={<CheckIcon/>} value={1}  onClick={addBoolen}>TF</Button>
+        </div>
     )
 }

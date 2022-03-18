@@ -15,7 +15,7 @@ export default function EditTextQuestion({ OnChange }) {
         <div>
             <FormGroup>
 
-                <label>Soru içeriğini giriniz ?</label>
+                <label>Please enter context of questions</label>
                 <TextareaAutosize
                     style={{ marginTop: "10px" }}
                     name='title'

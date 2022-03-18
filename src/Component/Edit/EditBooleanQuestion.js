@@ -30,7 +30,7 @@ export default function EditBooleanQuestion({ OnChange, onClick, OnChangeOption 
         <div>
             <FormControl>
 
-                <label>Başlık</label>
+                <label>Title</label>
                 <TextField
                     name='title'
 
@@ -53,7 +53,7 @@ export default function EditBooleanQuestion({ OnChange, onClick, OnChangeOption 
 
 
                 > </TextField>
-                <Button onClick={onClick}>Kaydet</Button>
+                <Button onClick={onClick}>Save</Button>
             </FormControl>
 
         </div >

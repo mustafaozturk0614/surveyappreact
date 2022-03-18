@@ -49,7 +49,7 @@ function RatingQuestion(props) {
       <FormControl>
 
 
-        <FormLabel id="demo-row-radio-buttons-group-label">
+        <FormLabel id="demo-row-radio-buttons-group-label" style={{ marginBottom: 8 }}>
 
 
           {template.questions.map((data, index) => <div key={index}><strong>{
@@ -82,11 +82,10 @@ function RatingQuestion(props) {
             )}   </FormLabel>
 
           <div style={{ display: 'flex', flexDirection: "row" }}>
-            {template.questions.map((data, index) => <div key={index} className="form-check form-check-inline" style={{ display: "flex" }}>{
-              data.types == 2 && parseInt(data.orderNo) == parseInt(order) ? list.map((d, index) => <div style={{ display: "flex" }}>
-                {d}
+            {list.map((d, index) => <div style={{ display: "flex" }}>
+              {d}
 
-              </div >) : ""
+            </div >)
 
             } </div >
 
@@ -94,12 +93,12 @@ function RatingQuestion(props) {
 
 
 
-            )}
 
 
 
 
-          </div>
+
+
 
           <div div className="d-inline me-4" >
             <FormLabel id="demo-controlled-radio-buttons-group">

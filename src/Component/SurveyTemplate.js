@@ -6,7 +6,7 @@ import RatingQuestion from './Questions/RatingQuestion';
 import TextQuestion from './Questions/TextQuestion';
 import './SurveyTemplate.css'
 import QuestionContext from './Questions/QuestionContext';
-import { Button } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 import BooleanButton from './Button/BooleanButton';
 import RatingButton from './Button/RatingButton';
 import TextButton from './Button/TextButton';
@@ -14,9 +14,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import axios from 'axios';
+import SendIcon from '@mui/icons-material/Send';
+import EditIcon from '@mui/icons-material/Edit';
 
-
+import { useNavigate } from 'react-router';
 const SurveyTemplate = () => {
+
+  let navigate = useNavigate();
 
 
 
@@ -152,6 +156,8 @@ const SurveyTemplate = () => {
     axios.post('/save', body)
     console.log(template)
 
+    navigate("/")
+
   }
   useEffect(() => {
 
@@ -175,23 +181,32 @@ const SurveyTemplate = () => {
 
 
   return (
-    <div>
+    <div  style={{ width: "100%", height: "2000px", backgroundColor: "#94bbe9", paddingTop: 10 }}>
+      <Grid container spacing={3} >
+        <Grid item xs={3}>
+          <h4 style={{ textAlign: "center" }}>Survey Component</h4>
+          <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginRight: 5 }}>
+            <BooleanButton></BooleanButton>
+            <p style={{ paddingTop: 15 }}>true or false</p>
 
+          </div>
+          <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginRight: 5, marginTop: 15 }}>
+            <RatingButton></RatingButton>
+            <p style={{ paddingTop: 15 }}> agree or disagree in a scale</p>
 
-      <div style={{ display: 'flex', marginLeft: "98px", marginTop: "18px", padding: '10px' }}>
-
-        <div className="col-md-2">
-          <BooleanButton></BooleanButton>
-          <RatingButton></RatingButton>
-          <TextButton></TextButton>
-        </div>
-
-        <div className="col-md-7">
-          <FormGroup style={{ border: "1px solid" }}>
-            <textarea className='surveyTemplateTextArea' name="title" placeholder='Başlık' onChange={onChange} >
+          </div>
+          <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginRight: 5, marginTop: 15 }}>
+            <TextButton></TextButton>
+            <p style={{ paddingTop: 15 }}>An empty field for open-ended expressions</p>
+          </div>
+        </Grid>
+        <Grid item xs={6}>
+          <h4 style={{ textAlign: "center" }}>Form Preview</h4>
+          <FormGroup className='surveyTemplateForm' style={{ border: "1px solid white", backgroundColor: "white", borderRadius: 5, offset: 5, padding: 5 }}>
+            <textarea className='surveyTemplateTextArea' name="title" placeholder='Title' onChange={onChange} >
 
             </textarea>
-            <textarea className='surveyTemplateTextArea' name="description" onChange={onChange} placeholder='Açıklama' >
+            <textarea className='surveyTemplateTextArea' name="description" onChange={onChange} placeholder='Description' style={{ fontSize: 24, marginTop: 15 }}>
 
             </textarea>
             <div>
@@ -223,50 +238,40 @@ const SurveyTemplate = () => {
                         )
                     }
                   })()}
-                      <div style={{ display: 'flex', flexDirection: "column", }} >
+                      <div style={{ display: 'flex', flexDirection: "column" }} >
 
-                        <Button className='btn btn-primary' onClick={updateQuestion} name={data.orderNo} value={data.types} > Güncelle</Button>
-                        <Button style={{ marginTop: "10px" }} onClick={deleteQuestion} name={data.orderNo} value={data.types} className='btn btn-danger' startIcon={<DeleteIcon />}    > Sil  </Button></div>
+                        <Button startIcon={<EditIcon />} color="info" variant="contained" style={{ textColor: "#6ea2e0" }} onClick={updateQuestion} name={data.orderNo} value={data.types} > Update </Button>
+                        <Button style={{ marginTop: "10px" }} color="error" onClick={deleteQuestion} name={data.orderNo} value={data.types} className='btn btn-danger' startIcon={<DeleteIcon />}> Delete </Button></div>
 
                     </Card>
 
-                    <Button name={index} onClick={moveUp} variant="contained" color="success" startIcon={<KeyboardArrowUpIcon />}   >yukarı taşı</Button>
-                    <Button name={index} onClick={moveDown} style={{ marginLeft: '20px' }} variant="contained" color="success" startIcon={<KeyboardArrowDownIcon />}   >aşağı taşı</Button>
-
+                    <Button name={index} onClick={moveUp} variant="contained" style={{ backgroundColor: "#6ea2e0" }} startIcon={<KeyboardArrowUpIcon />}> Move Up</Button>
+                    <Button name={index} onClick={moveDown} style={{ marginLeft: '20px', backgroundColor: "#6ea2e0" }} variant="contained" startIcon={<KeyboardArrowDownIcon />}> Move Down</Button>
                   </li>
-
-
                   )
 
                 }
-
-
-
               </ul>
-
-
-
             </div>
-            <button style={{ margin: '20px' }} type="button" className="btn btn-primary" onClick={onClick}>Submit</button>
-
-
-
+            <Button style={{ margin: '20px', backgroundColor: "#6ea2e0" }} variant="contained" startIcon={<SendIcon />} onClick={onClick}></Button>
           </FormGroup>
+        </Grid>
+        <Grid item xs={3}>
+          <h4 style={{ textAlign: "center" }}>Edit Form</h4>
+          <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginRight: 5, marginTop: 10 }}>
+            <EditQuestion></EditQuestion>
+          </div>
+        </Grid>
+      </Grid>
+    </div>
 
-        </div>
-
-
-        <div className="col-md-2" style={{ paddingLeft: "15px" }}>
-
-          <EditQuestion></EditQuestion>
 
 
 
 
-        </div>
 
-      </div >
-    </div >
+
+
   )
 
 

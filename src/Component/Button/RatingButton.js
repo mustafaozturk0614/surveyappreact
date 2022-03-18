@@ -1,19 +1,20 @@
 import React, { useContext, useState } from 'react'
 import QuestionContext from '../Questions/QuestionContext';
-
+import { Button } from '@mui/material';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 export default function RatingButton() {
 
     const { isClick, setIsClick, singleQuestion, setSingleQuestion, template, setTemplate, count, setCount, point } = useContext(QuestionContext)
 
 
     const newRatingQuestion = {
-        title: 'başlık',
+        title: 'Title',
         text: 'text',
         types: 1,
         value: 0,
         orderNo: 0,
-        start: "kötü",
-        finish: "çok iyi",
+        start: "bad",
+        finish: "good",
         point: 5,
 
     }
@@ -32,6 +33,6 @@ export default function RatingButton() {
 
     }
     return (
-        <div>  <button style={{ marginTop: '10px' }} value={2} type="button" className="btn btn-primary" onClick={addRating} >Rating</button></div>
+        <div>  <Button value={2} onClick={addRating} startIcon={<StarBorderOutlinedIcon/>}>Rating </Button></div>
     )
 }

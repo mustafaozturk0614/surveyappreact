@@ -2,6 +2,8 @@ import { Button, FormControl, TextField, Select, MenuItem, InputLabel } from '@m
 import { maxHeight } from '@mui/system'
 import React, { useContext } from 'react'
 import QuestionContext from '../Questions/QuestionContext';
+import SaveIcon from '@mui/icons-material/Save';
+
 
 export default function EditRatingQuestion({ OnChange, onClick, OnChangeRating, onchangePoint }) {
     const { point, setPoint } = useContext(QuestionContext)
@@ -21,7 +23,7 @@ export default function EditRatingQuestion({ OnChange, onClick, OnChangeRating, 
         <div>
 
             <FormControl>
-                <label>Başlık</label>
+                <label >Title</label>
                 <TextField
                     name='title'
                     onChange={OnChange}
@@ -29,14 +31,14 @@ export default function EditRatingQuestion({ OnChange, onClick, OnChangeRating, 
 
 
                 ></TextField>
-                <label>Başlangıç Değeri</label>
+                <label>Start Value</label>
                 <TextField
                     name='start'
                     onChange={OnChangeRating}
 
                 ></TextField>
 
-                <label>Bitiş Değeri</label>
+                <label>End Value</label>
                 <TextField
                     name='finish'
                     onChange={OnChangeRating}
@@ -44,7 +46,7 @@ export default function EditRatingQuestion({ OnChange, onClick, OnChangeRating, 
                 ></TextField>
 
 
-                <label> Puanı sistemini seçiniz</label>
+                <label> Choose points system</label>
 
                 <InputLabel id="demo-simple-select-label"></InputLabel>
                 <Select
@@ -52,16 +54,16 @@ export default function EditRatingQuestion({ OnChange, onClick, OnChangeRating, 
                     id="demo-simple-select"
                     name="point"
                     value={point}
-                    label="Puan"
+                    label="Point"
                     onChange={handleChange}
                     defaultValue={point}
                 >
-                    <MenuItem value={5}>Beşlik</MenuItem>
-                    <MenuItem value={10}>Onluk</MenuItem>
+                    <MenuItem value={5}>Five</MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
 
                 </Select>
 
-                <Button onClick={onClick}>Kaydet</Button>
+                <Button onClick={onClick} variant="contained" style={{marginTop:10,backgroundColor:"#6ea2e0"}} endIcon={<SaveIcon/>}>Save</Button>
 
             </FormControl>
 

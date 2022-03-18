@@ -6,11 +6,14 @@ import { QuestionProvider } from './Component/Questions/QuestionContext';
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import Home from './Component/pages/Home';
 import SurveyTemplateDetail from './Component/pages/SurveyTemplateDetail';
+import Navbarr from './Component/NavBarr';
+
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <Navbarr></Navbarr>
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/create" element={<SurveyTemplate />}></Route>
