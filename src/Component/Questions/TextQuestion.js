@@ -1,16 +1,28 @@
 import { TextField, FormLabel, Input } from '@mui/material';
 import React, { useContext } from 'react'
-import QuestionContext from '../Questions/QuestionContext';
-function TextQuestion(props) {
-  const { singleQuestion, setSingleQuestion, template, setTemplate, tempQuestion, setTempQuestion } = useContext(QuestionContext)
-  const { count, order } = props
 
+import * as Type from '../../utils/QuestionTypes'
+import SurveyContext from '../../Context/SurveyContext';
+function TextQuestion(props) {
+
+  const { template, setTemplate } = useContext(SurveyContext)
+  const { count, order, dbTemplate } = props
+  const changeList = () => {
+
+    if (template.questions.length > 0) {
+      return template.questions
+    } else {
+      return dbTemplate.questions
+    }
+
+  }
+  let list = changeList()
   return (
     <div>
 
       <div className="md-form">
-        <FormLabel>  {template.questions.map((data, index) => <div key={index}>{
-          data.types == 3 && data.orderNo == order ? data.title : ""
+        <FormLabel>  {list.map((data, index) => <div key={index}>{
+          data.types == Type.COMMENT && data.orderNo == order ? data.title : ""
 
         }</div>
 

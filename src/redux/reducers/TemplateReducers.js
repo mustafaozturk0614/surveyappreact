@@ -1,5 +1,5 @@
 import *as ACTIONS from '../actions/ActionsTypes'
-const initialState =
+const survey =
 
 {
 
@@ -11,13 +11,15 @@ const initialState =
 }
 
 
-const templateReducer = (state = { ...initialState }, action) => {
+const templateReducer = (state = { ...survey }, action) => {
 
     switch (action.type) {
 
         case ACTIONS.SAVETEMPLATE:
+            console.log(action)
             return {
                 ...action.payload,
+
 
 
             }

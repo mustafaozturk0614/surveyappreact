@@ -1,37 +1,27 @@
 import { FormGroup, TextField } from '@material-ui/core'
-
-
+import * as Type from '../../utils/QuestionTypes'
 import React, { useContext, useEffect, useState } from 'react'
-
-
-import QuestionContext from '../Questions/QuestionContext';
+import QuestionContext from '../../Context/QuestionContext';
 import EditBooleanQuestion from './EditBooleanQuestion'
 import EditRatingQuestion from './EditRatingQuestion'
 import EditTextQuestion from './EditTextQuestion'
+import SurveyContext from '../../Context/SurveyContext';
+import BooleanButton from '../Button/BooleanButton';
+import RatingButton from '../Button/RatingButton';
+import TextButton from '../Button/TextButton';
 
 
 function EditQuestion() {
 
 
-    const { isClick, setIsClick, singleQuestion, setSingleQuestion, template, setTemplate, point, setPoint } = useContext(QuestionContext)
-    const [ratQ, setratQ] = useState({
-
-        text: 'text',
-        types: 1,
-        option: [],
-        orderNo: 0,
-        start: "kötü",
-        finish: "çok iyi",
-        max: 0,
-        min: 1
-
-    })
-
+    const { isClick, setIsClick, singleQuestion, setSingleQuestion, point, setPoint, tempQuestion, setTempQuestion } = useContext(QuestionContext)
+    const { template, setTemplate } = useContext(SurveyContext)
     const [options, setOptions] = useState([{
 
         option1: "",
         option2: ""
     }])
+    const [tempIndex, setIndex] = useState()
 
 
     const OnChangeRating = (e) => {
@@ -41,18 +31,23 @@ function EditQuestion() {
 
         for (let index = 0; index < template.questions.length; index++) {
 
-            if (isClick.check == false) {
+            if (singleQuestion.isClick == false) {
                 if (q.orderNo == template.questions[index].orderNo) {
 
 
-                    setSingleQuestion({ ...singleQuestion, [name]: value })
+                    // setSingleQuestion({ ...singleQuestion, [name]: value })
+                    setTempQuestion({ ...tempQuestion, [name]: value })
                     let list = template.questions
+                    setIndex(index);
+                    // list[index].start = tempQuestion.start
+                    // list[index].title = tempQuestion.title
+                    // list[index].finish = tempQuestion.finish
+                    setSingleQuestion(preques => ({ ...singleQuestion, ...tempQuestion }))
+                    console.log(singleQuestion)
 
-                    // list[index].start = singleQuestion.start
-                    // list[index].title = singleQuestion.title
-                    // list[index].finish = singleQuestion.finish
 
                     // setTemplate({ ...template, questions: [...list] })
+
 
 
 
@@ -60,15 +55,28 @@ function EditQuestion() {
             }
 
             else {
-                if (isClick.orderNo == template.questions[index].orderNo) {
+                if (singleQuestion.orderNo == template.questions[index].orderNo) {
+                    let list = template.questions
+                    // setSingleQuestion({ ...singleQuestion, [name]: value })
+                    setTempQuestion({ ...tempQuestion, singleQuestion })
+                    setTempQuestion({ ...tempQuestion, [name]: value })
+                    // list[index].start = singleQuestion.start
+                    // list[index].title = singleQuestion.title
+                    // list[index].finish = singleQuestion.finish
 
-                    setSingleQuestion({ ...singleQuestion, [name]: value })
-
+                    // setTemplate({ ...template, questions: [...list] })
+                    console.log(singleQuestion)
+                    setIndex(index);
                 }
             }
         }
 
     }
+    useEffect(() => {
+
+
+
+    }, [singleQuestion, tempQuestion])
 
     const OnChange = (e) => {
 
@@ -78,7 +86,7 @@ function EditQuestion() {
 
         for (let index = 0; index < template.questions.length; index++) {
 
-            if (isClick.check == false) {
+            if (q.isClick == false) {
                 if (q.orderNo == template.questions[index].orderNo) {
                     let tempQuestion = template.questions[index]
 
@@ -91,9 +99,9 @@ function EditQuestion() {
             }
 
             else {
-                if (isClick.orderNo == template.questions[index].orderNo) {
+                if (q.orderNo == template.questions[index].orderNo) {
                     let tempQuestion = template.questions[index]
-                    setSingleQuestion({ ...tempQuestion })
+                    setSingleQuestion(preQues => ({ ...tempQuestion }))
                     tempQuestion.title = e.target.value
                 }
             }
@@ -111,14 +119,14 @@ function EditQuestion() {
     }
     const OnClickRating = () => {
         let list = template.questions
-
-        list[singleQuestion.orderNo] = singleQuestion
+        console.log(tempIndex)
+        list[tempIndex] = tempQuestion
 
 
 
         setTemplate({ ...template, questions: [...list] })
-        setTemplate({ ...template, questions: list })
-        console.log(template.questions)
+
+
 
     }
     const onClick = (e) => {
@@ -163,34 +171,24 @@ function EditQuestion() {
         setPoint(e.target.value)
         console.log(point)
     }
-
-    useEffect(() => {
-
-        console.log(template.questions)
-
-
-
-
-    }, [singleQuestion, template, isClick])
-
     const c = () => {
         let array = template.questions
         for (let index = 0; index < array.length; index++) {
-            if (isClick.check === true && isClick.orderNo == array[index].orderNo) {
-                console.log(isClick.types)
+            if (singleQuestion.isCheck === true && singleQuestion.orderNo == array[index].orderNo) {
+                console.log(singleQuestion.types)
 
-                switch (isClick.types) {
+                switch (parseInt(singleQuestion.types)) {
 
-                    case "1":
+                    case Type.TWO_OPTIONS:
                         return (
                             <EditBooleanQuestion OnChange={OnChange} singleQuestion={singleQuestion} OnChangeOption={OnChangeOption} onClick={onClick}  ></EditBooleanQuestion>
 
                         )
-                    case "2":
+                    case Type.LINEAR:
                         return (
                             <EditRatingQuestion OnChange={OnChange} singleQuestion={singleQuestion} OnChangeRating={OnChangeRating} onClick={OnClickRating} onchangePoint={onchangePoint} ></EditRatingQuestion>
                         )
-                    case "3":
+                    case Type.COMMENT:
                         return (
                             <EditTextQuestion OnChange={OnChange} singleQuestion={singleQuestion} OnChangeOption={OnChangeOption} onClick={onClick} ></EditTextQuestion>
                         )
@@ -210,15 +208,15 @@ function EditQuestion() {
     let a = c()
     const b = <div > {(() => {
         switch (singleQuestion.types) {
-            case 1:
+            case Type.TWO_OPTIONS:
                 return (
                     <EditBooleanQuestion OnChange={OnChange} singleQuestion={singleQuestion} OnChangeOption={OnChangeOption} onClick={onClick}  ></EditBooleanQuestion>
                 )
-            case 2:
+            case Type.LINEAR:
                 return (
                     <EditRatingQuestion OnChange={OnChange} singleQuestion={singleQuestion} OnChangeRating={OnChangeRating} onClick={OnClickRating}></EditRatingQuestion>
                 )
-            case 3:
+            case Type.COMMENT:
                 return (
                     <EditTextQuestion OnChange={OnChange} singleQuestion={singleQuestion} OnChangeOption={OnChangeOption} onClick={onClick}></EditTextQuestion>
                 )
@@ -235,7 +233,7 @@ function EditQuestion() {
     return (
         <div>
             <FormGroup>
-                {isClick.check ? a : b}
+                {b}
 
             </FormGroup>
 

@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { color } from "@mui/system";
+import { Menu, MenuItem } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,10 +40,18 @@ function Navbarr() {
     }
     return (
         <div>
-            <AppBar position="static">
+            <AppBar position="fixed" color="secondary" variant="elevation" style={{ height: 71 }}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
+                        <MenuIcon >
+                            <Menu>
+                                <MenuItem> a</MenuItem>
+                                <MenuItem> v</MenuItem>
+                                <MenuItem> v</MenuItem>
+
+
+                            </Menu>
+                        </MenuIcon>
                     </IconButton>
                     <Typography variant="h6" className={classes.title} style={{ textShadow: 'revert' }}>
                         <Link className={classes.link} to="/">Home</Link>
@@ -52,7 +61,7 @@ function Navbarr() {
                     </Typography>
                 </Toolbar>
             </AppBar>
-        </div>
+        </div >
     )
 }
 

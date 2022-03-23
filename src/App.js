@@ -1,30 +1,27 @@
 
 import './App.css';
-import SurveyComponent from './Component/SurveyComponent';
-import SurveyTemplate from './Component/SurveyTemplate';
-import { QuestionProvider } from './Component/Questions/QuestionContext';
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
-import Home from './Component/pages/Home';
-import SurveyTemplateDetail from './Component/pages/SurveyTemplateDetail';
-import Navbarr from './Component/NavBarr';
+import Home from './pages/Home'
+import SurveyTemplateDetail from './pages/SurveyTemplateDetail';
+import Navbarr from './Component/NavBarr.js';
+import SurveyTemplate from './pages/SurveyTemplate';
+
 
 
 function App() {
   return (
-    <div>
+    <div className='App'>
+
       <BrowserRouter>
-        <Navbarr></Navbarr>
-        <Routes>
+        <div style={{ zIndex: '1' }}> <Navbarr></Navbarr></div>
+        <div style={{ zIndex: '0' }}><Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/create" element={<SurveyTemplate />}></Route>
           <Route exact path="/template/:id" element={<SurveyTemplateDetail />}></Route>
+        </Routes></div>
 
-
-        </Routes>
-      </BrowserRouter>
-
-
-    </div>
+      </BrowserRouter >
+    </div >
 
 
   );

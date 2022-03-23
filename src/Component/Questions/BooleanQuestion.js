@@ -5,16 +5,27 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useSelector } from 'react-redux';
-import QuestionContext from '../Questions/QuestionContext';
+import QuestionContext from '../../Context/QuestionContext';
+import * as Type from '../../utils/QuestionTypes'
+import SurveyContext from '../../Context/SurveyContext';
 function BooleanQuestion(props) {
-  const { count, order } = props
+  const { count, order, dbTemplate } = props
 
 
-  const { singleQuestion, setSingleQuestion, template, setTemplate, tempQuestion, setTempQuestion } = useContext(QuestionContext)
 
+  const { template, setTemplate } = useContext(SurveyContext)
   const [value, setValue] = useState('female');
 
+  const changeList = () => {
 
+    if (template.questions.length > 0) {
+      return template.questions
+    } else {
+      return dbTemplate.questions
+    }
+
+  }
+  let list = changeList()
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -27,10 +38,8 @@ function BooleanQuestion(props) {
   }
   useEffect(() => {
 
-    setTemplate(template)
 
-
-  }, [singleQuestion, template])
+  }, [])
 
 
 
@@ -41,20 +50,20 @@ function BooleanQuestion(props) {
       <FormLabel id="demo-controlled-radio-buttons-group">
 
 
-        {template.questions.map((data, index) => <div key={index}>{
-          data.types == 1 && data.orderNo == order ? data.title : ""
+        {list.map((data, index) => <div key={index}>{
+          data.types === Type.TWO_OPTIONS && parseInt(data.orderNo) === parseInt(order) ? data.title : ""
 
         }</div>
 
 
         )}   </FormLabel>
       <RadioGroup>
-        <FormControlLabel name={count} control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
-          data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 2] : ""
+        <FormControlLabel name={count} control={<Radio />} label={list.map((data, index) => <div key={index}>{
+          data.types === Type.TWO_OPTIONS && parseInt(data.orderNo) == parseInt(order) && data.option.length > 0 ? data.option[data.option.length - 2] : ""
         }</div>
         )} />
-        <FormControlLabel name={count} value="male" control={<Radio />} label={template.questions.map((data, index) => <div key={index}>{
-          data.types == 1 && data.orderNo == order && data.option.length > 0 ? data.option[data.option.length - 1] : ""
+        <FormControlLabel name={count} value="male" control={<Radio />} label={list.map((data, index) => <div key={index}>{
+          data.types === Type.TWO_OPTIONS && parseInt(data.orderNo) == parseInt(order) && data.option.length > 0 ? data.option[data.option.length - 1] : ""
 
         }</div>
 

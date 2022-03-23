@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { FormGroup, TextField } from '@material-ui/core'
 import { Button, FormControl } from '@mui/material'
-import QuestionContext from '../Questions/QuestionContext'
+import SurveyContext from '../../Context/QuestionContext';
+
 
 export default function EditBooleanQuestion({ OnChange, onClick, OnChangeOption }) {
 
-    const { singleQuestion, setSingleQuestion, template, setTemplate } = useContext(QuestionContext)
+
     const [edit, setEdit] = useState({
 
         title: null,

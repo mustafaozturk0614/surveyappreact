@@ -26,11 +26,11 @@ export const addPoint = (question) => {
 };
 
 
-export const saveTemplate = () => {
+export const saveTemplate = (template) => {
 
     return {
         type: ACTIONS.SAVETEMPLATE,
-
+        payload: template
     };
 };
 

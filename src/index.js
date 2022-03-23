@@ -6,15 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import configureStore from "./redux/Store/ConfiguresStore"
 import { Provider } from 'react-redux';
-import { QuestionProvider } from './Component/Questions/QuestionContext';
+import { QuestionProvider } from './Context/QuestionContext';
+import { SurveyProvider } from './Context/SurveyContext';
+
 
 
 
 
 const store = configureStore();
 ReactDOM.render(
+  <Provider store={store}>  <QuestionProvider  ><SurveyProvider><App /></SurveyProvider></QuestionProvider></Provider>
 
-  <QuestionProvider  > <App /></QuestionProvider>
 
   ,
   document.getElementById('root')

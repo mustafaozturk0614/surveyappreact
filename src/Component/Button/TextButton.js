@@ -1,19 +1,21 @@
 import React, { useContext, useState } from 'react'
-import QuestionContext from '../Questions/QuestionContext';
+import QuestionContext from '../../Context/QuestionContext';
 import { Button } from '@mui/material';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
+import * as Type from '../../utils/QuestionTypes'
+import SurveyContext from '../../Context/SurveyContext';
 export default function TextButton() {
 
-    const { isClick, setIsClick, singleQuestion, setSingleQuestion, template, setTemplate, count, setCount } = useContext(QuestionContext)
-
-
+    const { isClick, setIsClick, singleQuestion, setSingleQuestion, count, setCount } = useContext(QuestionContext)
+    const { template, setTemplate } = useContext(SurveyContext)
 
     const newQuestion = {
         title: 'Title',
         text: 'text',
-        types: 1,
+        types: Type.COMMENT,
         option: [],
         orderNo: 0,
+        isClick: false
 
     }
 
@@ -31,6 +33,6 @@ export default function TextButton() {
     }
 
     return (
-        <div><Button value={3}  onClick={addText}startIcon={<ModeCommentOutlinedIcon/>}>Text</Button></div>
+        <div><Button value={3} onClick={addText} startIcon={<ModeCommentOutlinedIcon />}>Text</Button></div>
     )
 }
