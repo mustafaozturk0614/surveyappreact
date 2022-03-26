@@ -9,11 +9,9 @@ function TextQuestion(props) {
   const { count, order, dbTemplate } = props
   const changeList = () => {
 
-    if (template.questions.length > 0) {
-      return template.questions
-    } else {
-      return dbTemplate.questions
-    }
+
+    return template.questions
+
 
   }
   let list = changeList()
@@ -22,18 +20,10 @@ function TextQuestion(props) {
 
       <div className="md-form">
         <FormLabel>  {list.map((data, index) => <div key={index}>{
-          data.types == Type.COMMENT && data.orderNo == order ? data.title : ""
-
+          data.types === Type.COMMENT && data.orderNo == order ? data.title : ""
         }</div>
-
-
         )}</FormLabel>
         <TextField style={{ marginTop: '20px' }} id="form7" className="md-textarea form-control" rows="3" name={count}>
-
-
-
-
-
 
         </TextField>
 

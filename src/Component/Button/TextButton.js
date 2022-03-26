@@ -22,7 +22,6 @@ export default function TextButton() {
     const addText = (e) => {
         e.preventDefault();
         setCount(count + 1)
-        newQuestion.types = 3
         newQuestion.orderNo = count
         setSingleQuestion(newQuestion)
         let list = [...template.questions]

@@ -18,11 +18,9 @@ function BooleanQuestion(props) {
 
   const changeList = () => {
 
-    if (template.questions.length > 0) {
-      return template.questions
-    } else {
-      return dbTemplate.questions
-    }
+
+    return template.questions
+
 
   }
   let list = changeList()
@@ -37,7 +35,7 @@ function BooleanQuestion(props) {
 
   }
   useEffect(() => {
-
+    console.log(dbTemplate)
 
   }, [])
 

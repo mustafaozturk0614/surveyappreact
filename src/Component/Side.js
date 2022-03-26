@@ -1,70 +1,62 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import Toolbar from '@mui/material/Toolbar';
-import Drawer from '@mui/material/Drawer';
-import { makeStyles } from '@material-ui/core';
-const drawerWidth = 240;
-const useStyles = makeStyles({
-    list: {
-        width: 250
-    },
-    fullList: {
-        width: "auto"
-    },
-    paper: {
-        background: "red"
+import { Layout, Menu, Breadcrumb } from 'antd';
+import {
+    DesktopOutlined,
+    PieChartOutlined,
+    FileOutlined,
+    TeamOutlined,
+    UserOutlined,
+} from '@ant-design/icons';
+import { Component } from 'react';
+import zIndex from '@material-ui/core/styles/zIndex';
+import './Navbar.css'
+import { padding } from '@mui/system';
+import { Link } from 'react-router-dom';
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+
+export default class Side extends Component {
+    state = {
+        collapsed: false,
+    };
+
+    onCollapse = collapsed => {
+        console.log(collapsed);
+        this.setState({ collapsed });
+    };
+
+    render() {
+        const { collapsed } = this.state;
+        return (
+            <Layout style={{ height: '1000px', width: '50px', background: 'none', position: 'fixed', marginTop: 36 }}>
+                <Sider style={{ backgroundImage: 'linear-gradient(to right top, #7fccd6,#1b7e85,#1674cc,#2bc3d9,#38c3dc,#5cd4d7,#74c5cf,#abf1ce,#92e9ff)' }} collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+
+                    <Menu style={{ marginTop: 10, backgroundColor: 'inherit' }} defaultSelectedKeys={['1']} mode="inline">
+
+
+                        <Menu.Item key="1" icon={<PieChartOutlined />}>
+                            Templates
+                        </Menu.Item>
+
+                        <Menu.Item key="2" icon={<DesktopOutlined />}>
+                            <Link to='/survey' >   Surveys</Link>
+                        </Menu.Item>
+
+
+                        <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+                            <Menu.Item key="3">Tom</Menu.Item>
+                            <Menu.Item key="4">Bill</Menu.Item>
+                            <Menu.Item key="5">Alex</Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
+                            <Menu.Item key="6">Team 1</Menu.Item>
+                            <Menu.Item key="8">Team 2</Menu.Item>
+                        </SubMenu>
+                        <Menu.Item key="9" icon={<FileOutlined />}>
+                            Files
+                        </Menu.Item>
+                    </Menu>
+                </Sider>
+            </Layout >
+        );
     }
-});
-export default function Side() {
-
-    const classes = useStyles();
-
-    return (
-        <div >
-
-
-
-
-
-            <Drawer
-                classes={{ paper: classes.paper }}
-
-                variant="permanent"
-
-
-
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-
-
-                }}
-            >
-                <Toolbar />
-                <Box sx={{ overflow: 'auto' }}
-                >
-                    <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </Box>
-            </Drawer>
-        </div >
-    );
 }

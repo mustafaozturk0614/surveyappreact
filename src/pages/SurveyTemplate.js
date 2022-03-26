@@ -5,8 +5,6 @@ import './SurveyTemplate.css'
 import QuestionContext from '../Context/QuestionContext';
 import { Button, Container, Grid } from '@mui/material';
 
-
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -149,7 +147,7 @@ const SurveyTemplate = () => {
 
   const onClick = () => {
 
-
+    let version = template.version + 1
     const body = {
       title: template.title,
       description: template.description,
@@ -157,7 +155,7 @@ const SurveyTemplate = () => {
       questions: template.questions,
       isDraft: template.isDraft,
       createdDate: convertDateToTimestamp(new Date()),
-
+      version: version
     }
 
     axios.post('/save', body)
@@ -183,16 +181,16 @@ const SurveyTemplate = () => {
   }
 
   useEffect(() => {
-    console.log(tempData)
-
-    return (
-      setTemplate(preTemplate => ({ ...template, ...tempData }))
-    )
+    console.log(template)
+    setTemplate(preTemplate => ({ ...template, ...tempData }))
+    // return (
+    //   setTemplate(preTemplate => ({ ...template, ...tempData }))
+    // )
   }, [template.title, template.description])
 
 
   return (
-    <div className='container' style={{ marginLeft: 80, display: 'flex ', width: 2100 }} >
+    <div className='App container' style={{ marginLeft: 80, display: 'flex ', width: 2100 }} >
       <Grid container spacing={2} >
         <Grid item xs={3}>
           <h4 style={{ textAlign: "center" }}>Survey Component</h4>
@@ -274,7 +272,6 @@ const SurveyTemplate = () => {
           <h4 style={{ textAlign: "center", marginLeft: 165, color: '#262626' }}>Edit Form</h4>
           <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginLeft: 105, width: 350, marginTop: 10 }}>
             <EditQuestion></EditQuestion>
-
           </div>
         </Grid>
       </Grid>

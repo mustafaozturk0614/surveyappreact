@@ -24,11 +24,9 @@ function RatingQuestion(props) {
     </div >
   const changeList = () => {
 
-    if (template.questions.length > 0) {
-      return template.questions
-    } else {
-      return dbTemplate.questions
-    }
+
+    return template.questions
+
 
   }
   let dbList = changeList()
@@ -70,7 +68,7 @@ function RatingQuestion(props) {
 
 
           {dbList.map((data, index) => <div key={index}><strong>{
-            data.types == Type.LINEAR && parseInt(data.orderNo) == parseInt(order) ? data.title : ""
+            data.types === Type.LINEAR && parseInt(data.orderNo) == parseInt(order) ? data.title : ""
 
           } </strong></div>
 
@@ -80,8 +78,7 @@ function RatingQuestion(props) {
         <div style={{ display: 'flex', flexDirection: "row", justifyContent: 'space-around' }} >
           <FormLabel id="demo-controlled-radio-buttons-group" style={{ padding: 5 }}>
             {dbList.map((data, index) => <div key={index}>{
-              data.types == Type.LINEAR == 2 && parseInt(data.orderNo) == parseInt(order) ? data.start : ""
-
+              data.types === Type.LINEAR && parseInt(data.orderNo) == parseInt(order) ? data.start : ""
             } </div>
 
             )}   </FormLabel>
@@ -97,7 +94,7 @@ function RatingQuestion(props) {
 
 
             {dbList.map((data, index) => <div key={index}>{
-              parseInt(data.types) == 2 && parseInt(data.orderNo) == parseInt(order) ? data.finish : ""
+              data.types === Type.LINEAR && parseInt(data.orderNo) == parseInt(order) ? data.finish : ""
 
             } </div>
 

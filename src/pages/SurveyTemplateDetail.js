@@ -4,9 +4,6 @@ import BooleanQuestion from '../Component/Questions/BooleanQuestion';
 import './SurveyTemplate.css'
 import QuestionContext from '../Context/QuestionContext';
 import { Button, Container, Grid } from '@mui/material';
-
-
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -14,6 +11,7 @@ import axios from 'axios';
 import SendIcon from '@mui/icons-material/Send';
 import EditIcon from '@mui/icons-material/Edit';
 import { convertDateToTimestamp } from '../utils/DateConvert';
+import { Modal } from 'antd';
 import { useNavigate, useParams } from 'react-router';
 import SurveyContext from '../Context/SurveyContext';
 import * as Type from '../utils/QuestionTypes';
@@ -24,7 +22,7 @@ import TextButton from '../Component/Button/TextButton';
 import TextQuestion from '../Component/Questions/TextQuestion';
 import RatingButton from '../Component/Button/RatingButton';
 import SurveyService from './surveyService';
-
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 export default function SurveyTemplateDetail() {
     let { id } = useParams()
@@ -38,7 +36,23 @@ export default function SurveyTemplateDetail() {
 
     let navigate = useNavigate();
 
+    const { confirm } = Modal;
 
+    const showConfirm = () => {
+        confirm({
+            title: 'Saving the changes will cause the version change.  Do you want to continue',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Some descriptions',
+            onOk() {
+                console.log('OK');
+                onClick()
+
+            },
+            onCancel() {
+                console.log('Cancel');
+            },
+        });
+    }
 
 
     const { isClick, setIsClick, singleQuestion, setSingleQuestion, tempQuestion, setTempQuestion } = useContext(QuestionContext)
@@ -162,23 +176,26 @@ export default function SurveyTemplateDetail() {
     }
 
     const onClick = () => {
-        let date = new Date().convertDateToTimestamp()
 
+        // let version = template.version + 1
         const body = {
             title: template.title,
             description: template.description,
             text: template.text,
             questions: template.questions,
             isDraft: template.isDraft,
-
+            createdDate: convertDateToTimestamp(new Date()),
+            version: template.version
 
         }
+        let service = new SurveyService()
+        service.updateById(id, body)
 
-        axios.post('/save', body)
         console.log(body)
 
 
         navigate("/")
+        console.log(template)
 
     }
 
@@ -198,19 +215,30 @@ export default function SurveyTemplateDetail() {
     }
 
     useEffect(() => {
-        console.log(tempData)
+        console.log(template)
+
 
         return (
             setTemplate(preTemplate => ({ ...template, ...tempData }))
+
         )
     }, [template.title, template.description])
 
     useEffect(() => {
-        console.log(temp)
-        let productService = new SurveyService()
-        productService.getBySurveyId(id).then(result => setTemp(predta => ({ ...result.data })))
 
-        console.log(template)
+        let productService = new SurveyService()
+        productService.getBySurveyId(id).then(result => {
+
+
+            setTemplate(predta => ({ template, ...result.data }))
+            setTempData(predta => ({
+                title: result.data.title,
+                description: result.data.description
+            }))
+
+        })
+
+
         // fetch("/getById?id=" + id, {
         //     method: "GET",
 
@@ -240,10 +268,8 @@ export default function SurveyTemplateDetail() {
     return (
 
 
-        <div style={{
-            paddingTop: 10
-        }}>
-            <Grid container spacing={3} >
+        <div className='App container' style={{ marginLeft: 80, display: 'flex ', width: 2100 }} >
+            <Grid container spacing={2} >
                 <Grid item xs={3}>
                     <h4 style={{ textAlign: "center" }}>Survey Component</h4>
                     <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginRight: 5 }}>
@@ -265,16 +291,18 @@ export default function SurveyTemplateDetail() {
                     <h4 style={{ textAlign: "center" }}>Form Preview</h4>
                     <FormGroup className='surveyTemplateForm' style={{ offset: 5, padding: 5 }}>
 
-                        <textarea className='surveyTemplateTextArea' name="title" placeholder='Title' onChange={onChange} >
+                        <textarea className='surveyTemplateTextArea' value={tempData.title} name="title" placeholder='Title' onChange={onChange} >
+
                         </textarea>
-                        <textarea className='surveyTemplateTextArea' name="description" onChange={onChange} placeholder='Description' style={{ fontSize: 24, marginTop: 15 }}>
+                        <textarea className='surveyTemplateTextArea' value={tempData.description} name="description" onChange={onChange} placeholder='Description' style={{ fontSize: 24, marginTop: 15 }}>
+
                         </textarea>
 
                         <div>
                             <ul style={{ display: 'flex', flexDirection: "column" }}>
 
-                                {temp.questions != undefined ?
-                                    temp.questions.map((data, index) => <li key={index} style={{ display: 'block', margin: "20px" }}
+                                {template.questions != undefined ?
+                                    template.questions.map((data, index) => <li key={index} style={{ display: 'block', margin: "20px" }}
                                     >  <Card style={{ display: 'flex', flexDirection: "row", padding: '10px', justifyContent: "center", alignItems: "center" }}> {(() => {
                                         switch (data.types) {
                                             case Type.TWO_OPTIONS:
@@ -326,13 +354,14 @@ export default function SurveyTemplateDetail() {
 
                             </ul>
                         </div>
-                        <Button style={{ margin: '20px', backgroundColor: "#6ea2e0" }} variant="contained" startIcon={<SendIcon />} onClick={onClick}></Button>
+                        <Button style={{ margin: '20px', backgroundColor: "#6ea2e0" }} variant="contained" startIcon={<SendIcon />} onClick={showConfirm}></Button>
                     </FormGroup>
                 </Grid>
                 <Grid item xs={3}>
                     <h4 style={{ textAlign: "center" }}>Edit Form</h4>
-                    <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginRight: 5, marginTop: 10 }}>
+                    <div style={{ backgroundColor: "white", justifyContent: "center", textAlign: "center", padding: 5, paddingTop: 5, borderRadius: 5, marginLeft: 105, width: 350, marginTop: 10 }}>
                         <EditQuestion></EditQuestion>
+
                     </div>
                 </Grid>
             </Grid>

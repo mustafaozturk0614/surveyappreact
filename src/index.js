@@ -10,15 +10,19 @@ import { QuestionProvider } from './Context/QuestionContext';
 import { SurveyProvider } from './Context/SurveyContext';
 
 
+import 'antd/dist/antd.css'
+import { Login } from '@mui/icons-material';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
+import { CourseProvider } from './Context/CourseContext';
 
 
 
 const store = configureStore();
 ReactDOM.render(
-  <Provider store={store}>  <QuestionProvider  ><SurveyProvider><App /></SurveyProvider></QuestionProvider></Provider>
 
 
-  ,
+  <Provider Provider store={store} > <QuestionProvider  ><SurveyProvider> <CourseProvider><App /></CourseProvider>   </SurveyProvider></QuestionProvider></Provider >,
   document.getElementById('root')
 );
 

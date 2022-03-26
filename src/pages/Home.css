@@ -1,30 +1,50 @@
 .homePage {
   display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  margin-left: 30px;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+ 
 }
-.side {
-}
-a {
-  text-decoration: none;
-  color: #70116b;
-}
+
 
 .homeCard {
   background-image: url(../assets/survey.jpg);
   background-size: cover;
-
+  background-position: center center;
+ padding: 2px;
   border: 1.2px solid #00b4eb;
   border-radius: 50px;
   display: flex;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  justify-content: center;
+  margin:15px;
+  margin-top: 20px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction:column;
   width: 200px;
-  height: 200px;
+  height: 210px;
   align-items: center;
+ 
+  box-shadow: 0 1px 1px rgba(59, 17, 155, 0.1), 0 2px 2px rgba(59, 17, 155, 0.1),
+    0 4px 4px rgba(59, 17, 155, 0.1), 0 8px 8px rgba(59, 17, 155, 0.1),
+    0 16px 16px rgba(59, 17, 155, 0.1);
+}
+.homeCard1 {
+  background-image: url(../assets/survey.jpg);
+  background-size: cover;
+  background-position: center center;
+ padding: 2px;
+  border: 1.2px solid #00b4eb;
+  border-radius: 50px;
+  display: flex;
+  margin:15px;
+  margin-top: 20px;
   justify-content: center;
+  display: flex;
+  flex-direction:column;
+  width: 200px;
+  height: 210px;
+  align-items: center;
+ 
   box-shadow: 0 1px 1px rgba(59, 17, 155, 0.1), 0 2px 2px rgba(59, 17, 155, 0.1),
     0 4px 4px rgba(59, 17, 155, 0.1), 0 8px 8px rgba(59, 17, 155, 0.1),
     0 16px 16px rgba(59, 17, 155, 0.1);
@@ -38,7 +58,9 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
+  display: flex;
 }
+
 
 .tempList {
   background-image: linear-gradient(
@@ -60,19 +82,23 @@ a {
   flex-direction: row;
   justify-content: flex-start;
   padding-left: 5px;
+  margin-top: 50px;
   border-radius: 12px;
-
   border: 0.1px;
-
+  height: 31rem;
   flex-wrap: wrap;
   overflow: hidden;
-  width: 100%;
+  width: 46.3rem;
   text-align: center;
   box-shadow: 0 1px 1px #115570, 0 2px 2px #115570, 0 4px 4px #115570,
     0 8px 8px #115570, 0 16px 16px #115570;
 }
 
 .homeCard:hover {
+  font-size: 150px;
+  border: 3px solid #a182ce;
+}
+.homeCard1:hover {
   font-size: 150px;
   border: 3px solid #a182ce;
 }

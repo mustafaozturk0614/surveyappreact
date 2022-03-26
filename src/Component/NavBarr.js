@@ -8,12 +8,14 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { color } from "@mui/system";
 import { Menu, MenuItem } from "@material-ui/core";
-
+import './Navbar.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+
     },
+
     menuButton: {
         marginRight: theme.spacing(2),
     },
@@ -39,20 +41,10 @@ function Navbarr() {
         setTemplate({})
     }
     return (
-        <div>
-            <AppBar position="fixed" color="secondary" variant="elevation" style={{ height: 71 }}>
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon >
-                            <Menu>
-                                <MenuItem> a</MenuItem>
-                                <MenuItem> v</MenuItem>
-                                <MenuItem> v</MenuItem>
+        <div className="navDiv">
+            <AppBar className="navB" style={{ backgroundColor: '#001529', height: 100, }} variant="elevation">
+                <Toolbar style={{ display: 'flex', justifyContent: 'start' }}>
 
-
-                            </Menu>
-                        </MenuIcon>
-                    </IconButton>
                     <Typography variant="h6" className={classes.title} style={{ textShadow: 'revert' }}>
                         <Link className={classes.link} to="/">Home</Link>
                     </Typography>
@@ -61,6 +53,7 @@ function Navbarr() {
                     </Typography>
                 </Toolbar>
             </AppBar>
+
         </div >
     )
 }

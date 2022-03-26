@@ -1,0 +1,17 @@
+.navB {
+  background-image: linear-gradient( to right top, #1b7e85,#74c5cf,#29a3b6,#228999,#187194,#92e9ff);
+  
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 12px;
+ display: flex;
+ justify-content: center;
+ position: fixed; 
+
+}
+.navDiv{
+display: flex;
+
+
+}

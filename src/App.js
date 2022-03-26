@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import SurveyTemplateDetail from './pages/SurveyTemplateDetail';
 import Navbarr from './Component/NavBarr.js';
 import SurveyTemplate from './pages/SurveyTemplate';
+import Survey from './pages/Survey';
 
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/create" element={<SurveyTemplate />}></Route>
           <Route exact path="/template/:id" element={<SurveyTemplateDetail />}></Route>
+          <Route exact path="/survey" element={<Survey />}></Route>
         </Routes></div>
 
       </BrowserRouter >
