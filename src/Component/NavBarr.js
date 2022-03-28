@@ -45,11 +45,11 @@ function Navbarr() {
             <AppBar className="navB" style={{ backgroundColor: '#001529', height: 100, }} variant="elevation">
                 <Toolbar style={{ display: 'flex', justifyContent: 'start' }}>
 
-                    <Typography variant="h6" className={classes.title} style={{ textShadow: 'revert' }}>
+                    <Typography variant="h6" className={classes.title}>
                         <Link className={classes.link} to="/">Home</Link>
                     </Typography>
                     <Typography variant="h6">
-                        <Link on onClick={onClick} className={classes.link} to="/create">Creator</Link>
+                        <Link onClick={onClick} className={classes.link} to="/create">Creator</Link>
                     </Typography>
                 </Toolbar>
             </AppBar>

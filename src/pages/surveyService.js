@@ -3,7 +3,7 @@ import axios from "axios"
 export default class SurveyService {
     getTemplates(page = 0, size = 6) {
 
-        return axios.get(`/getall?page=${page}&size=${size}`)
+        return axios.get(`/findall?page=${page}&size=${size}`)
     }
 
     getBySurveyId(id) {
@@ -35,6 +35,10 @@ export default class SurveyService {
         return axios.get("http://localhost:8081/getAllsurvey")
 
     }
+    getquestionBySurveyId(id) {
+        return axios.get("/question/findbytemplate?id=" + id)
+    }
+
 }
 
 

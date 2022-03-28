@@ -34,10 +34,10 @@ function BooleanQuestion(props) {
     console.log(value)
 
   }
-  useEffect(() => {
-    console.log(dbTemplate)
+  // useEffect(() => {
 
-  }, [])
+
+  // }, [])
 
 
 

@@ -88,6 +88,11 @@ export default function Home() {
 
 
     }
+    const findTemplate = (e) => {
+        e.preventDefault()
+        console.log(e.target.name)
+
+    }
 
     const { content, last, first } = page
 
@@ -160,7 +165,12 @@ export default function Home() {
                                                     </Button></div>
 
                                                 <IconButton aria-label="share">
-                                                    <Link to={`/template/${data.id}`}> <EditIcon fontSize='medium' color='info' /></Link>
+                                                    <Link to={`/template/${data.id}`}> <EditIcon name={data.id} onClick={(e) => {
+                                                        setTemplate(pre => ({ ...template, ...data }))
+                                                        console.log(template)
+
+
+                                                    }} fontSize='medium' color='info' /></Link>
 
                                                 </IconButton>
                                                 <IconButton aria-label="share">

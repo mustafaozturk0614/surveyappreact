@@ -21,12 +21,10 @@ code {
 
 body {
   display: flex;
-  background-image: linear-gradient(to right top,#ffed92,#c4e996,#5cd4d7,#4dd4c0,#38c3dc,#5cd4d7,#74c5cf, #abf1ce,#ffed92
-  );
+  background: linear-gradient(to right top, #c9da81,#5cd4d7,#4dd4c0,#38c3dc,#5cd4d7,#74c5cf, #abf1ce,#ffed92);
 
   margin: 0;
-  width: 2500px;
-  height: 2500px;
+ 
   margin: 0;
   background-attachment : fixed;
   font-family: var(--mdb-body-font-family);
@@ -38,3 +36,55 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+.wrapper{
+  box-sizing: border-box;
+justify-content: stretch;
+height: 90vh;
+width: 100vw;
+display: flex;
+/* height: 700px;
+width:1750px ; */
+background: url('./assets/3d-customer-survey-data-analysis-background-rendered-image_18199-176.webp');
+background-size: cover;
+background-position: right, center;
+background-blend-mode: multiply;
+background-repeat: no-repeat;
+
+
+}
+.loginImage{
+  
+}
+
+
+
+.custom-shape-divider-bottom-1648396759 {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+overflow: hidden;
+line-height: 0;
+transform: rotate(180deg);
+
+
+}
+
+.custom-shape-divider-bottom-1648396759 svg {
+position: relative;
+display: block;
+width: calc(132% + 1.3px);
+height: 200px;
+
+}
+
+
+.custom-shape-divider-bottom-1648396759 .shape-fill {
+fill: rgba(255, 255, 255, 0.89);
+height: 100px;
+
+
+
+}
+
+

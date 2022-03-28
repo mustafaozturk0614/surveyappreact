@@ -25,6 +25,7 @@ function EditQuestion() {
 
 
     const OnChangeRating = (e) => {
+        e.preventDefault()
         const { name, value } = e.target
         let q = { ...singleQuestion }
 
@@ -72,14 +73,10 @@ function EditQuestion() {
         }
 
     }
-    useEffect(() => {
 
-
-
-    }, [singleQuestion, tempQuestion])
 
     const OnChange = (e) => {
-
+        e.preventDefault()
         const { name, value } = e.target
 
         let q = { ...singleQuestion }
@@ -90,7 +87,8 @@ function EditQuestion() {
                 if (q.orderNo == template.questions[index].orderNo) {
                     let tempQuestion = template.questions[index]
 
-                    setSingleQuestion({ ...singleQuestion, [name]: value })
+                    setSingleQuestion(pre => ({ ...singleQuestion, [name]: value }))
+
 
                     tempQuestion.title = e.target.value
 
@@ -108,6 +106,7 @@ function EditQuestion() {
         }
     }
     const OnChangeOption = (e) => {
+        e.preventDefault()
         const { name, value } = e.target
 
 
@@ -130,7 +129,7 @@ function EditQuestion() {
 
     }
     const onClick = (e) => {
-
+        e.preventDefault()
         let q = { ...singleQuestion }
         console.log(singleQuestion)
         let array = template.questions
@@ -166,6 +165,7 @@ function EditQuestion() {
 
     }
     const onchangePoint = (e) => {
+        e.preventDefault()
         const { name, value } = e.target
         console.log(e.target)
         setPoint(e.target.value)
