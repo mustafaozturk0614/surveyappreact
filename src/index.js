@@ -15,6 +15,7 @@ import { Login } from '@mui/icons-material';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import { CourseProvider } from './Context/CourseContext';
+import SurveyList from './pages/Surveylist';
 
 
 

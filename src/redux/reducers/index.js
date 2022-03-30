@@ -1,13 +1,15 @@
-import { combineReducers } from "redux";
-import questionReducer from "./QuestionReducers"
-import templateReducer from "./TemplateReducers";
+// import { combineReducers } from "redux";
+// import authReducer from "../actions/authReducers";
+// import questionReducer from "./QuestionReducers"
+// import templateReducer from "./TemplateReducers";
 
 
-const rootReducer = combineReducers({
+// const rootReducer = combineReducers({
 
-    templateReducer: templateReducer,
-    questionReducer: questionReducer
-})
+//     templateReducer: templateReducer,
+//     questionReducer: questionReducer,
+//     authReducer: authReducer
+// })
 
 
-export default rootReducer
+// export default rootReducer

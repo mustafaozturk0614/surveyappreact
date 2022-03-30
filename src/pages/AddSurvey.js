@@ -40,7 +40,7 @@ const AddSurvey = () => {
 
         let surveyService = new SurveyService
         surveyService.findByTitle(e).then(result => setSurvey(predta => ({ ...result.data })))
-
+        console.log(survey)
 
     }
     const onChangeCourses = (e) => {
@@ -68,7 +68,6 @@ const AddSurvey = () => {
         let courseService = new CourseService()
         courseService.getCourses().then(result => {
             setCoureslist(result.data)
-
             setCourse(result.data)
             setSingleCourse(result.data[0])
             console.log(course)
@@ -91,20 +90,21 @@ const AddSurvey = () => {
         console.log(singleCourse)
 
         let temp = {
-            template: survey,
+
             startTime: time.startTime,
             finishTime: time.finishTime,
             courseid: singleCourse.id,
-            sequenceNumber: survey.sequenceNumber + 1,
-            templateUId: survey.id,
+            sequenceNumber: survey.sequenceNumber,
+            templateId: survey.id,
+            title: survey.title
 
         }
         let surveyservice = new SurveyService()
         setPostSurvey(preTemplate => ({ ...postSurvey, courseId: singleCourse.id }))
-        setPostSurvey(preTemplate => ({ ...postSurvey, ...temp }))
-
+        setSurvey(preTemplate => ({ ...survey, ...temp }))
+        console.log(temp)
         surveyservice.createSurvey(temp)
-        console.log(postSurvey)
+
         navigate('/')
 
     }

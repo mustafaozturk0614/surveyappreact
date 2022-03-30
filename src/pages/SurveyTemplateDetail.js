@@ -11,7 +11,7 @@ import axios from 'axios';
 import SendIcon from '@mui/icons-material/Send';
 import EditIcon from '@mui/icons-material/Edit';
 import { convertDateToTimestamp } from '../utils/DateConvert';
-import { Modal, Result } from 'antd';
+import { Modal } from 'antd';
 import { useNavigate, useParams } from 'react-router';
 import SurveyContext from '../Context/SurveyContext';
 import * as Type from '../utils/QuestionTypes';
@@ -23,22 +23,11 @@ import TextQuestion from '../Component/Questions/TextQuestion';
 import RatingButton from '../Component/Button/RatingButton';
 import SurveyService from './surveyService';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { LockResetOutlined } from '@mui/icons-material';
 
 export default function SurveyTemplateDetail() {
     let { id } = useParams()
+    const [temp, setTemp] = useState({})
 
-    const [questionList, setQuestionList] = useState([])
-    const { isClick, setIsClick, singleQuestion, setSingleQuestion, tempQuestion, setTempQuestion } = useContext(QuestionContext)
-    const { template, setTemplate } = useContext(SurveyContext)
-    const [tempData, setTempData] = useState({
-
-        title: "",
-        description: "",
-
-
-
-    })
 
     // let { templateReducer } = useSelector((store) => ({
     //     templateReducer: store.templateReducer
@@ -66,7 +55,16 @@ export default function SurveyTemplateDetail() {
     }
 
 
+    const { isClick, setIsClick, singleQuestion, setSingleQuestion, tempQuestion, setTempQuestion } = useContext(QuestionContext)
+    const { template, setTemplate } = useContext(SurveyContext)
+    const [tempData, setTempData] = useState({
 
+        title: "",
+        description: "",
+
+
+
+    })
     const updateQuestion = (e) => {
         let a = { ...isClick }
 
@@ -216,34 +214,30 @@ export default function SurveyTemplateDetail() {
 
     }
 
-    // useEffect(() => {
-    //     console.log(template)
+    useEffect(() => {
+        console.log(template)
 
 
-    //     return (
-    //         setTemplate(preTemplate => ({ ...template, ...tempData }))
+        return (
+            setTemplate(preTemplate => ({ ...template, ...tempData }))
 
-    //     )
-    // }, [template.title, template.description])
+        )
+    }, [template.title, template.description])
 
-    const loadQuestion = async (id) => {
-        let surveyService = new SurveyService()
-
-
-        try {
-
-            const response = await surveyService.getquestionBySurveyId(id);
-            console.log(response.data);
-            setTemplate(preTemplate => ({ ...template, questions: [...response.data] }))
-
-        } catch (error) {
-
-        }
-    };
     useEffect(() => {
 
-        loadQuestion(id)
+        let productService = new SurveyService()
 
+        productService.getBySurveyId(id).then(result => {
+
+
+            setTemplate(predta => ({ template, ...result.data }))
+            setTempData(predta => ({
+                title: result.data.title,
+                description: result.data.description
+            }))
+
+        })
 
 
         // fetch("/getById?id=" + id, {
@@ -268,6 +262,7 @@ export default function SurveyTemplateDetail() {
 
         // console.log(templateReducer)
 
+        console.log(temp)
     }, [])
 
 
